@@ -1,8 +1,9 @@
 /*our includes*/
-const express 	= require('express')
-const multer	= require('multer')
+const express 	= require('express');
+const multer	= require('multer');
 const fs 		= require('fs');
-const app 		= express()
+const app 		= express();
+const port = process.env.PORT || 3000;
 
 /*configure multer*/
 const storage = multer.diskStorage({
@@ -49,4 +50,6 @@ app.get('/photo/:id', function(req, res){
 })
 
 /*now run our code*/
-app.listen(3000)
+app.listen(port, function(){
+	console.log("oh yeah, console logging it! Head on over to port " + port + " for more information.");
+});
