@@ -1,12 +1,10 @@
+/*our includes*/
 const express 	= require('express')
 const multer	= require('multer')
 const fs 		= require('fs');
-
 const app 		= express()
 
-
-
-
+/*configure multer*/
 const storage = multer.diskStorage({
 	destination : function(req, file, callback){
 		callback(null, './uploads');
@@ -21,17 +19,11 @@ const upload = multer({
 })
 .single('photo')
 
-
-
+/*setup some express middleware*/
 app.set('view engine', 'ejs')
 app.set('views', __dirname)
 
-
-
-
-
-
-
+/*lets make our API fams*/
 app.get('/', function(req, res){
 
 	const files = fs.readdirSync( __dirname + '/uploads');
@@ -52,10 +44,9 @@ app.get('/api/photo/:id', function(req, res){
 	res.sendFile( __dirname + '/uploads/' + req.params.id)
 })
 
-
 app.get('/photo/:id', function(req, res){
 	res.send( "<img src='/api/photo/"+ req.params.id + "'></img>")
 })
 
-
+/*now run our code*/
 app.listen(3000)
